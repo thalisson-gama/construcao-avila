@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"C:/Users/Pedro Rafachine/Downloads/Cópia de AVILA_ENGENHARIA_LOGO_SEM_FUNDO.png\" \"C:/Users/Pedro Rafachine/Documents/M2Black/Avila/logo.png\")",
+      "Bash(cp \"C:/Users/Pedro Rafachine/Downloads/Cópia de AVILA_ENGENHARIA_PALETA_DE_CORES.jpg\" \"C:/Users/Pedro Rafachine/Documents/M2Black/Avila/paleta.jpg\")",
+      "Bash(where cwebp:*)",
+      "Bash(where npx:*)",
+      "Bash(npx --yes sharp-cli --input logo.png --output logo.webp --format webp)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(cp \"C:/Users/Pedro Rafachine/Downloads/Gemini_Generated_Image_h0gm55h0gm55h0gm \\(1\\).png\" \"C:/Users/Pedro Rafachine/Documents/M2Black/Avila/rodrigo-avila.png\")",
+      "Bash(npx --yes sharp-cli --input rodrigo-avila.png --output rodrigo-avila.webp --format webp)",
+      "Bash(identify logo.png)",
+      "Bash(python -c \"from PIL import Image; im=Image.open\\(''''logo.png''''\\); print\\(im.size\\)\")",
+      "Bash(node -e \"const sharp = require\\(''sharp''\\); sharp\\(''logo.png''\\).extract\\({left:0,top:0,width:2951,height:2100}\\).toFormat\\(''webp''\\).toFile\\(''logo-icon.webp''\\).then\\(\\(\\)=>console.log\\(''OK''\\)\\).catch\\(e=>console.error\\(e\\)\\)\")",
+      "Bash(npm install:*)",
+      "Bash(netstat -ano)",
+      "Bash(cp \"C:/Users/Pedro Rafachine/Downloads/IMG_20160613_092205918_Original.jpg\" \"C:/Users/Pedro Rafachine/Documents/M2Black/Avila/hero-bg.jpg\")",
+      "Bash(node -e \"const sharp=require\\(''sharp''\\); sharp\\(''hero-bg.jpg''\\).resize\\(1920,null,{withoutEnlargement:true}\\).toFormat\\(''webp'',{quality:82}\\).toFile\\(''hero-bg.webp''\\).then\\(\\(\\)=>console.log\\(''OK''\\)\\)\")",
+      "Bash(DL=\"C:/Users/Pedro Rafachine/Downloads\")",
+      "Bash(cp \"$DL/IMG_20160721_115633954_HDR_Original.jpg\" obra-01.jpg)",
+      "Bash(cp \"$DL/IMG_7880_Original.jpg\" obra-02.jpg)",
+      "Bash(cp \"$DL/IMG_9321_Original.jpg\" obra-03.jpg)",
+      "Bash(cp \"$DL/IMG_9747_Original.jpg\" obra-04.jpg)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
