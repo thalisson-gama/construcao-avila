@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Avila Engenharia - Construção de Alto Padrão no Litoral Norte da Bahia</title>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TG6RDLNP');</script>
+  <!-- End Google Tag Manager -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -954,6 +961,10 @@
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TG6RDLNP"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- ============================================================
        1. HERO
@@ -1074,7 +1085,7 @@
 
         <article class="example-card fade-in">
           <div class="card-header">
-            <img loading="lazy" src="obra-10.webp" alt="Residência de luxo em Busca Vida" />
+            <img loading="lazy" src="exemplo-01.webp" alt="Residência de luxo em Busca Vida" />
             <div class="card-specs">
               <div class="spec-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -1108,7 +1119,7 @@
 
         <article class="example-card fade-in" style="transition-delay:0.15s">
           <div class="card-header">
-            <img loading="lazy" src="obra-02.webp" alt="Casa de veraneio em Guarajuba" />
+            <img loading="lazy" src="exemplo-02.webp" alt="Casa de veraneio em Guarajuba" />
             <div class="card-specs">
               <div class="spec-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -1142,7 +1153,7 @@
 
         <article class="example-card fade-in" style="transition-delay:0.3s">
           <div class="card-header">
-            <img loading="lazy" src="obra-04.webp" alt="Residência premium em Praia do Forte" />
+            <img loading="lazy" src="exemplo-03.webp" alt="Residência premium em Praia do Forte" />
             <div class="card-specs">
               <div class="spec-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -1587,8 +1598,14 @@
       document.getElementById(errId).classList.remove('show');
     }
 
-    // TROCAR: cole aqui a URL do seu webhook (Make.com, n8n, Zapier, etc.)
-    const WEBHOOK_URL = 'https://SEU_WEBHOOK_AQUI';
+    // Webhook AtenderBem — Avila Engenharia
+    const WEBHOOK_URL = 'https://m2black.atenderbem.com/webhookcapture/capture/a84a438b3e914d77a5720c0a438d198c';
+
+    function getUTM(key) {
+      return new URLSearchParams(window.location.search).get(key) || '';
+    }
+
+    function pad2(n) { return n < 10 ? '0' + n : '' + n; }
 
     function submitForm() {
       if (!validateStep2()) return;
@@ -1598,16 +1615,35 @@
       submitBtn.textContent = 'Enviando...';
       submitBtn.disabled = true;
 
+      const now = new Date();
+      const dataFmt = pad2(now.getDate()) + '/' + pad2(now.getMonth() + 1) + '/' + now.getFullYear();
+      const horarioFmt = pad2(now.getHours()) + ':' + pad2(now.getMinutes());
+
       const payload = {
-        nome: document.getElementById('nome').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        whatsapp: document.getElementById('whatsapp').value.trim(),
-        terreno: document.getElementById('terreno').value,
-        projeto: document.getElementById('projeto').value,
-        cidade: document.getElementById('cidade').value.trim(),
-        renda: document.getElementById('renda').value.trim(),
-        enviado_em: new Date().toISOString(),
-        pagina: window.location.href
+        // Padrão AtenderBem
+        Nome: document.getElementById('nome').value.trim(),
+        Email: document.getElementById('email').value.trim(),
+        WhatsApp: document.getElementById('whatsapp').value.replace(/\D/g, ''),
+
+        // Customizadas do formulário Ávila
+        tem_terreno: document.getElementById('terreno').value,
+        projeto_arquitetonico: document.getElementById('projeto').value,
+        cidade_origem: document.getElementById('cidade').value.trim(),
+        investimento: document.getElementById('renda').value.trim(),
+
+        // Metadados de origem
+        Nome_do_site: 'Ávila',
+        Nome_da_pagina: document.title,
+        URL_da_pagina: window.location.href,
+        Data: dataFmt,
+        Horario: horarioFmt,
+
+        // UTMs
+        utm_source: getUTM('utm_source'),
+        utm_medium: getUTM('utm_medium'),
+        utm_campaign: getUTM('utm_campaign'),
+        utm_term: getUTM('utm_term'),
+        utm_content: getUTM('utm_content')
       };
 
       fetch(WEBHOOK_URL, {
@@ -1620,7 +1656,7 @@
         showSuccess();
       })
       .catch(() => {
-        console.warn('Webhook falhou — exibindo sucesso mesmo assim.');
+        console.warn('Webhook falhou - exibindo sucesso mesmo assim.');
         showSuccess();
       });
 
