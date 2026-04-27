@@ -21,7 +21,11 @@
       "Bash(cp \"$DL/IMG_7880_Original.jpg\" obra-02.jpg)",
       "Bash(cp \"$DL/IMG_9321_Original.jpg\" obra-03.jpg)",
       "Bash(cp \"$DL/IMG_9747_Original.jpg\" obra-04.jpg)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(taskkill //F //PID 47040)",
+      "Bash(git -C \"C:/Users/Pedro Rafachine/Documents/M2Black/Avila/\" remote -v)",
+      "Bash(gh auth *)",
+      "Bash(node -e ' *)"
     ]
   }
 }
